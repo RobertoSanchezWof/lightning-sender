@@ -1,0 +1,70 @@
+async-generator==1.10
+attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1671632566681/work
+brotlipy @ file:///D:/bld/brotlipy_1666764804378/work
+CacheControl==0.12.11
+cachetools==5.2.1
+certifi==2022.12.7
+cffi @ file:///D:/bld/cffi_1671179506518/work
+charset-normalizer==2.1.1
+click==8.1.3
+colorama==0.4.6
+cryptography @ file:///D:/bld/cryptography-split_1677821512041/work
+exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1671811474537/work
+firebase==3.0.1
+firebase-admin==6.0.1
+gevent==22.10.2
+google-api-core==2.11.0
+google-api-python-client==2.72.0
+google-auth==2.16.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==0.8.0
+google-cloud-core==2.3.2
+google-cloud-firestore==2.8.0
+google-cloud-storage==2.7.0
+google-crc32c==1.5.0
+google-resumable-media==2.4.0
+googleapis-common-protos==1.58.0
+greenlet==2.0.2
+grpcio==1.51.1
+grpcio-status==1.51.1
+gspread==5.7.2
+h11 @ file:///home/conda/feedstock_root/build_artifacts/h11_1664132893548/work
+httplib2==0.21.0
+idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1663625384323/work
+lightning-sender==1.0
+msgpack==1.0.4
+numpy @ file:///D:/bld/numpy_1675642725500/work
+oauthlib==3.2.2
+outcome @ file:///home/conda/feedstock_root/build_artifacts/outcome_1655217710638/work
+pandas @ file:///D:/bld/pandas_1674136614909/work
+proto-plus==1.22.2
+protobuf==4.21.12
+pyasn1==0.4.8
+pyasn1-modules==0.2.8
+pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1636257122734/work
+PyJWT==2.6.0
+pyOpenSSL @ file:///home/conda/feedstock_root/build_artifacts/pyopenssl_1672659226110/work
+pyparsing==3.0.9
+PySocks @ file:///D:/bld/pysocks_1661604991356/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
+python-firebase==1.2
+pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1673864280276/work
+requests==2.28.1
+requests-oauthlib==1.3.1
+rsa==4.9
+selenium @ file:///home/conda/feedstock_root/build_artifacts/selenium_1677446585651/work
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+sniffio @ file:///home/conda/feedstock_root/build_artifacts/sniffio_1662051266223/work
+sortedcontainers @ file:///home/conda/feedstock_root/build_artifacts/sortedcontainers_1621217038088/work
+trio @ file:///D:/bld/trio_1666780135997/work
+trio-websocket @ file:///home/conda/feedstock_root/build_artifacts/trio-websocket_1641849081899/work/dist
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1665144421445/work
+uritemplate==4.1.1
+urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1673452138552/work
+websocket==0.2.1
+websocket-client==1.5.1
+websockets==10.4
+win-inet-pton @ file:///D:/bld/win_inet_pton_1667051142467/work
+wsproto @ file:///home/conda/feedstock_root/build_artifacts/wsproto_1661356345548/work
+zope.event==4.6
+zope.interface==5.5.2
