@@ -12,8 +12,8 @@ db = firestore.client()
 
 def addDataToFirestore(type, latitude, longitude, time):
     doc_id = f"{time}-{random.randint(0, 100000)}"
-    # Crea una referencia al documento en la colección "storm"
-    doc_ref = db.collection('storm').document(doc_id)
+    # Crea una referencia al documento en la colección "lightning"
+    doc_ref = db.collection('lightning').document(doc_id)
     # Sube la información a Firestore
     try:
         doc_ref.set({
