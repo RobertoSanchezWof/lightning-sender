@@ -10,7 +10,8 @@ firebase_admin.initialize_app(cred)
 # Crea una instancia de la API de Firestore
 db = firestore.client()
 
-def addDataToFirestore(type, latitude, longitude, time):
+def AddDataToFirestore(type, latitude, longitude, time):
+    """inserta los datos en la base de datos"""
     doc_id = f"{time}-{random.randint(0, 100000)}"
     # Crea una referencia al documento en la colección "lightning"
     doc_ref = db.collection('lightning').document(doc_id)

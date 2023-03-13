@@ -41,6 +41,7 @@ def pointInPoly(x,y,poly):
     else: return "OUT"
 
 def ExtractData(json_string, polygon):
+    """Extrae la información de un JSON y la compara con un polígono"""
     data = json.loads(json_string)
     type = data['type']
     time = data['time']
@@ -52,12 +53,13 @@ def ExtractData(json_string, polygon):
         activateAddDataToFirestore = input("¿Desea activar la función addDataToFirestore()? (S/N): ")
         if activateAddDataToFirestore.upper() == "S":
             print("ingresa data a firestore")
-            #addDataToFirestore(type, latitude, longitude, time)
+            #AddDataToFirestore(type, latitude, longitude, time)
     else:
         print("no esta adentro")
         return False
 
 x = '{"type":0,"time":1678292764430,"peakCurrent":-8963,"numSensors":10,"icHeight":0,"icMultiplicity":0,"cgMultiplicity":3,"Pulses":[{"type":0,"time":"2023-03-08T16:25:50.766793518Z","latitude":-15.551629,"longitude":-72.725977,"peakCurrent":-8963,"numSensors":10,"icHeight":0},{"type":0,"time":"2023-03-08T16:25:50.696567000Z","latitude":-15.4737,"longitude":-72.7455,"peakCurrent":1247,"numSensors":7,"icHeight":0},{"type":0,"time":"2023-03-08T16:25:50.651452872Z","latitude":-15.607114,"longitude":-72.776314,"peakCurrent":8195,"numSensors":8,"icHeight":0}],"lat":-15.551629,"lon":-72.725977}'
+
 poligono = [(-70.6477450, -18.6462451), (-70.9115486, -26.3918697), (-71.6589923, -29.1521613), (-71.7469268, -30.4107818),
             (-71.7469268, -33.3947592), (-73.7183660, -37.1165262), (-73.7073193, -37.6490340), (-73.5273708, -38.1431975),
             (-73.4462883, -39.4870850), (-74.0178629, -41.0130658), (-74.5015029, -43.4369660), (-75.7909058, -46.7398606),
