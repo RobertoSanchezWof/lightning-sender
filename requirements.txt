@@ -36,6 +36,7 @@ msgpack==1.0.4
 numpy @ file:///D:/bld/numpy_1675642725500/work
 oauthlib==3.2.2
 outcome @ file:///home/conda/feedstock_root/build_artifacts/outcome_1655217710638/work
+paho-mqtt==1.6.1
 pandas @ file:///D:/bld/pandas_1674136614909/work
 proto-plus==1.22.2
 protobuf==4.21.12
@@ -61,9 +62,6 @@ trio-websocket @ file:///home/conda/feedstock_root/build_artifacts/trio-websocke
 typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1665144421445/work
 uritemplate==4.1.1
 urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1673452138552/work
-websocket==0.2.1
-websocket-client==1.5.1
-websockets==10.4
 win-inet-pton @ file:///D:/bld/win_inet_pton_1667051142467/work
 wsproto @ file:///home/conda/feedstock_root/build_artifacts/wsproto_1661356345548/work
 zope.event==4.6
