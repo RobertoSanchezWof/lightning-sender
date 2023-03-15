@@ -55,13 +55,10 @@ def SearchPolygon(latitude, longitude):
     result = pointInPoly(latitude, longitude, constants.polygonConoSur)
     if result == "IN":
         if pointInPoly(latitude, longitude, constants.polygonChile) == "IN":
-            print("relámpago ocasionado dentro del area de Chile")
             return "Chile"
         elif pointInPoly(latitude, longitude, constants.polygonArgentinaUruguay) == "IN" and pointInPoly(latitude, longitude, constants.polygonUruguay) == "OUT":
-            print("relámpago ocasionado dentro del area de Argentina")
             return "Argentina"
         elif pointInPoly(latitude, longitude, constants.polygonUruguay) == "IN":
-            print("relámpago ocasionado dentro del area de Uruguay")
             return "Uruguay"
     else:
         return False

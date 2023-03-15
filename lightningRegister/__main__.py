@@ -10,11 +10,7 @@ def OnMessage(client, userdata, message):
     country = SearchPolygon(latitude, longitude)
     #si el relámpago esta dentro de un polígono, lo sube a la base de datos
     if country != False:
-        print(type, peakCurrent, latitude, longitude, time, country)
         AddDataToFirestore(type, peakCurrent, latitude, longitude, time, country)
-    else:
-        print("relámpago no asociado al area")
-    
 
 # Establece la función de callback para cuando se conecte el cliente al broker
 def OnConnect(client, userdata, flags, rc):
