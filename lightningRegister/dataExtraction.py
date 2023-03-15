@@ -1,6 +1,5 @@
 import json
 import constants
-#from firebaseFunctions import addDataToFirestore
 
 # Improved point in polygon test which includes edge
 # and vertex points
@@ -41,25 +40,28 @@ def pointInPoly(x,y,poly):
     if inside: return "IN"
     else: return "OUT"
 
-def ExtractData(json_string, polygon):
+def ExtractData(json_string):
     """Extrae la información de un JSON y la compara con un polígono"""
     data = json.loads(json_string)
     type = data['type']
     time = data['time']
+    peakCurrent = data['peakCurrent']
     latitude = data['lat']
     longitude = data['lon']
-    print(type, latitude, longitude, time)
-    if pointInPoly(latitude, longitude, polygon) == "IN":
-        print("relámpago ocasionado dentro del area")
-        # activateAddDataToFirestore = input("¿Desea activar registrar el relámpago? (S/N): ")
-        # if activateAddDataToFirestore.upper() == "S":
-        #     print("ingresa data a firestore")
-            #AddDataToFirestore(type, latitude, longitude, time)
+    return type, peakCurrent, latitude, longitude, time
+
+def SearchPolygon(latitude, longitude):
+    """Busca si el relámpago esta en algún polígono"""
+    result = pointInPoly(latitude, longitude, constants.polygonConoSur)
+    if result == "IN":
+        if pointInPoly(latitude, longitude, constants.polygonChile) == "IN":
+            print("relámpago ocasionado dentro del area de Chile")
+            return "Chile"
+        elif pointInPoly(latitude, longitude, constants.polygonArgentinaUruguay) == "IN" and pointInPoly(latitude, longitude, constants.polygonUruguay) == "OUT":
+            print("relámpago ocasionado dentro del area de Argentina")
+            return "Argentina"
+        elif pointInPoly(latitude, longitude, constants.polygonUruguay) == "IN":
+            print("relámpago ocasionado dentro del area de Uruguay")
+            return "Uruguay"
     else:
-        print("relámpago no asociado al area")
         return False
-
-x = '{"type":0,"time":1678292764430,"peakCurrent":-8963,"numSensors":10,"icHeight":0,"icMultiplicity":0,"cgMultiplicity":3,"Pulses":[{"type":0,"time":"2023-03-08T16:25:50.766793518Z","latitude":-15.551629,"longitude":-72.725977,"peakCurrent":-8963,"numSensors":10,"icHeight":0},{"type":0,"time":"2023-03-08T16:25:50.696567000Z","latitude":-15.4737,"longitude":-72.7455,"peakCurrent":1247,"numSensors":7,"icHeight":0},{"type":0,"time":"2023-03-08T16:25:50.651452872Z","latitude":-15.607114,"longitude":-72.776314,"peakCurrent":8195,"numSensors":8,"icHeight":0}],"lat":-72.3100132,"lon":-37.3876175}'
-x2 = '{"type":0,"time":1678292764430,"peakCurrent":-8963,"numSensors":10,"icHeight":0,"icMultiplicity":0,"cgMultiplicity":3,"Pulses":[{"type":0,"time":"2023-03-08T16:25:50.766793518Z","latitude":-15.551629,"longitude":-72.725977,"peakCurrent":-8963,"numSensors":10,"icHeight":0},{"type":0,"time":"2023-03-08T16:25:50.696567000Z","latitude":-15.4737,"longitude":-72.7455,"peakCurrent":1247,"numSensors":7,"icHeight":0},{"type":0,"time":"2023-03-08T16:25:50.651452872Z","latitude":-15.607114,"longitude":-72.776314,"peakCurrent":8195,"numSensors":8,"icHeight":0}],"lat":-15.551629,"lon":-72.725977}'
-
-ExtractData (x, constants.polygon)
