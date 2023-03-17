@@ -52,10 +52,12 @@ def ExtractData(json_string):
 
 def SearchPolygon(latitude, longitude):
     """Busca si el relámpago esta en algún polígono"""
-    result = pointInPoly(latitude, longitude, constants.polygonConoSur)
+    result = pointInPoly(latitude, longitude, constants.polygonAmericaSur)
     if result == "IN":
         if pointInPoly(latitude, longitude, constants.polygonChile) == "IN":
             return "Chile"
+        elif pointInPoly(latitude, longitude, constants.polygonBrasil) == "IN": 
+            return "Brasil"
         elif pointInPoly(latitude, longitude, constants.polygonArgentinaUruguay) == "IN" and pointInPoly(latitude, longitude, constants.polygonUruguay) == "OUT":
             return "Argentina"
         elif pointInPoly(latitude, longitude, constants.polygonUruguay) == "IN":

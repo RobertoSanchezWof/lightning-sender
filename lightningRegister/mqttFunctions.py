@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 from firebaseFunctions import AddDataToFirestore
 from dataExtraction import ExtractData, SearchPolygon
+import sys
 
 # Define la función de callback para cuando se reciba un mensaje
 def OnMessage(client, userdata, message):
@@ -9,6 +10,14 @@ def OnMessage(client, userdata, message):
     #busca el polígono al que pertenece el relámpago
     country = SearchPolygon(latitude, longitude)
     #si el relámpago esta dentro de un polígono, lo sube a la base de datos
+    if len(sys.argv) > 1 and sys.argv[1] == "-v":
+        print("Tipo de relámpago: ", type)
+        print("Corriente pico: ", peakCurrent)
+        print("Latitud: ", latitude)
+        print("Longitud: ", longitude)
+        print("Tiempo: ", time)
+        if country == False:
+            print("País: ", "Fuera de Area" )
     if country != False:
         AddDataToFirestore(type, peakCurrent, latitude, longitude, time, country)
 
