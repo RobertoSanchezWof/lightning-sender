@@ -1,21 +1,23 @@
-import paho.mqtt.client as mqtt
+import asyncio
+from asyncio_mqtt import Client
 from mqttFunctions import OnConnect, OnMessage
 
-def main():
-    # Crea una instancia del cliente MQTT
-    client = mqtt.Client()
-    # Asigna las funciones de callback al cliente MQTT
-    client.on_connect = OnConnect
-    client.on_message = OnMessage
-    try:
-        # Conecta el cliente MQTT al servidor y puerto especificados
-        client.connect("Test.dtect.africa", 1883)
-        # Inicia el bucle infinito del cliente MQTT para mantener la conexión activa
-        client.loop_forever()
-    except KeyboardInterrupt:
-        print("Deteniendo el programa...")
-        client.disconnect()  # Desconecta el cliente MQTT de forma segura
-        client.loop_stop() 
+async def main():
+    # Establece las credenciales y el servidor MQTT
+    broker = "Test.dtect.africa"
+    port = 1883
+    
+    async with Client(broker, port) as client:
+        # Llama a la función OnConnect
+        await OnConnect(client)
+
+        # Llama a la función OnMessage
+        await OnMessage(client)
 
 if __name__ == "__main__":
-    main()
+    # Cambia al "Selector" event loop en Windows
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("El programa fue interrumpido por el usuario. Cerrando...")

@@ -12,13 +12,13 @@ cred = credentials.Certificate(pathCredentials)
 firebase_admin.initialize_app(cred)
 
 # Crea una instancia de la API de Firestore
-db = firestore.client()
+db : firestore.firestore.Client = firestore.client()
 
-def AddDataToFirestore(type, peakCurrent, latitude, longitude, time, country):
+def AddDataToFirestore(type, peakCurrent, latitude, longitude, time, country, link, duration):
     """inserta los datos en la base de datos"""
     doc_id = f"{time}-{random.randint(0,9)}"
     # Crea una referencia al documento en la colección "lightning"
-    doc_ref = db.collection('lightning').document(doc_id)
+    doc_ref = db.collection('testing/lightning/america').document(doc_id)
     # Sube la información a Firestore
     try:
         doc_ref.set({
@@ -26,7 +26,10 @@ def AddDataToFirestore(type, peakCurrent, latitude, longitude, time, country):
             'country': country,
             'peakCurrent': peakCurrent,
             'latitude': latitude,
-            'longitude': longitude
+            'longitude': longitude,
+            'time': time,
+            'duration': duration,
+            'link': link
         })
     except:
         print("Error al subir los datos a Firestore")
