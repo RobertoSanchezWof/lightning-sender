@@ -35,4 +35,4 @@ async def timerpush():
                     AddDataToFirestore(listUruguay, timeStar, timeEnd, "uruguay")
                 timeStar = timeEnd
                 mqttFunctions.dataList.clear()  # Borra la lista después de agregar los datos
-        await asyncio.sleep(10)  # espera 5 segundos antes de ejecutar la función nuevamente
+        await asyncio.sleep(300)  # espera 5 segundos antes de ejecutar la función nuevamente
