@@ -13,15 +13,15 @@ firebase_admin.initialize_app(cred)
 # Crea una instancia de la API de Firestore
 db : firestore.firestore.Client = firestore.client()
 
-def AddDataToFirestore(data, dateStart, dateEnd):
+def AddDataToFirestore(data, dateStart, dateEnd, country):
     """inserta los datos en la base de datos"""
     # Crea una referencia al documento en la colección "lightning"
-    doc_ref = db.collection('testing/lightning/america').document(str(dateEnd))
+    doc_ref = db.collection(f'lightning/sudamerica/{country}').document(str(dateEnd))
     # Sube la información a Firestore
     try:
         doc_ref.set({
-            'timeStart': dateStart,
-            'timeEnd': dateEnd,
+            'timestamp_start': dateStart,
+            'timestamp_end': dateEnd,
             'data': data
         })
     except Exception as e:

@@ -51,6 +51,8 @@ screen -r lightning
 ```
 Para desconectar de la sesión sin cerrarla, presiona Ctrl + A y luego Ctrl + D.
 
+Para analizar los datos que se muestran en la consola, ingrese el comando -v o -all. El primero imprimirá las coordenadas filtradas por polígonos, mientras que el segundo mostrará todas las coordenadas. Además, puede agregar un segundo argumento para especificar el intervalo de tiempo entre cada impresión en la consola.
+
 ## Simulación
 Se ha creado un test para simular casos en diferentes áreas geográficas. Para ejecutar el test, se debe correr el script test_sendData.py. Este script simula los casos de lightning en Chile, Argentina, Uruguay y fuera del cono sur, y verifica que los datos sean procesados correctamente por la función OnMessage del módulo mqttFunctions.
 
