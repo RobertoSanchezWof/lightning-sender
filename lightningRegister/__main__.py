@@ -1,4 +1,5 @@
 import asyncio
+import sys
 from asyncio_mqtt import Client
 from mqttFunctions import OnConnect, OnMessage
 from firestoreStorage import timerpush
@@ -18,8 +19,9 @@ if __name__ == "__main__":
     port = 1883
 
     client = Client(broker, port)
-    # Cambia al "Selector" event loop en Windows
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    if sys.platform == "win32":
+        # Cambia al "Selector" event loop en Windows
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     try:
         loop = asyncio.get_event_loop()
         loop.create_task(timerpush())
