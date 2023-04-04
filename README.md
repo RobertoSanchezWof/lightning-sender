@@ -41,7 +41,7 @@ screen -S lightning
 ```
 
 ```
-python lightninRegister
+python lightningRegister
 ```
 
 si ya esta instalado el programa ejecutar el comando

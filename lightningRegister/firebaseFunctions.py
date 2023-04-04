@@ -2,7 +2,6 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from os import path
-import random
 
 #Extrae las credenciales alojadas en el dispositivo local
 pathCredentials = path.join(path.expanduser('~'), ".auth", "wof_firebase.json")
@@ -14,22 +13,16 @@ firebase_admin.initialize_app(cred)
 # Crea una instancia de la API de Firestore
 db : firestore.firestore.Client = firestore.client()
 
-def AddDataToFirestore(type, peakCurrent, latitude, longitude, time, country, link, duration):
+def AddDataToFirestore(data, dateStart, dateEnd):
     """inserta los datos en la base de datos"""
-    doc_id = f"{time}-{random.randint(0,9)}"
     # Crea una referencia al documento en la colección "lightning"
-    doc_ref = db.collection('testing/lightning/america').document(doc_id)
+    doc_ref = db.collection('testing/lightning/america').document(str(dateEnd))
     # Sube la información a Firestore
     try:
         doc_ref.set({
-            'type': type,
-            'country': country,
-            'peakCurrent': peakCurrent,
-            'latitude': latitude,
-            'longitude': longitude,
-            'time': time,
-            'duration': duration,
-            'link': link
+            'timeStart': dateStart,
+            'timeEnd': dateEnd,
+            'data': data
         })
-    except:
-        print("Error al subir los datos a Firestore")
+    except Exception as e:
+        print("Error al subir los datos a Firestore:", e)
