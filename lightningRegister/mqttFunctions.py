@@ -5,6 +5,7 @@ import sys
 import time
 import asyncio
 import json
+import csv
 
 #timer para el control de print por consola (solo para pruebas)
 timer = 0

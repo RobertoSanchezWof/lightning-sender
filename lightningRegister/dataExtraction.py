@@ -49,11 +49,11 @@ def SearchPolygonCountry(data):
         if PointInPoly(data['lat'], data['lon'], constants.polygonChile) == True:
             data['country'] = "Chile"
             return data
-        elif PointInPoly(data['lat'], data['lon'], constants.polygonBrasil) == True:
-            data['country'] = "Brasil"
-            return data
         elif PointInPoly(data['lat'], data['lon'], constants.polygonUruguay) == True:
             data['country'] = "Uruguay"
+            return data
+        elif PointInPoly(data['lat'], data['lon'], constants.polygonBrasil) == True:
+            data['country'] = "Brasil"
             return data
         else:
             data['country'] = False

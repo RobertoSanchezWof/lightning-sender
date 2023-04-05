@@ -28,11 +28,14 @@ async def timerpush():
                 timeEnd = int(datetime.now().timestamp())
                 # Envía las listas por país a Firestore
                 if listBrasil:
+                    #print(f"Brasil: {len(listBrasil)}")
                     AddDataToFirestore(listBrasil, timeStar, timeEnd, "brasil")
                 if listChile:
+                    #print(f"Chile: {len(listChile)}")
                     AddDataToFirestore(listChile, timeStar, timeEnd, "chile")
                 if listUruguay:
+                    #print(f"Uruguay: {len(listUruguay)}")
                     AddDataToFirestore(listUruguay, timeStar, timeEnd, "uruguay")
                 timeStar = timeEnd
                 mqttFunctions.dataList.clear()  # Borra la lista después de agregar los datos
-        await asyncio.sleep(300)  # espera 5 segundos antes de ejecutar la función nuevamente
+        await asyncio.sleep(300)
