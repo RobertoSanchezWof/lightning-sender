@@ -1,8 +1,8 @@
 import asyncio
 import sys
 from asyncio_mqtt import Client
-from mqttFunctions import OnConnect, OnMessage
-from firestoreStorage import timerpush
+from lightningRegister.mqttFunctions import OnConnect, OnMessage
+from lightningRegister.firestoreStorage import timerpush
 
 async def main():
     async with Client(broker, port) as client:

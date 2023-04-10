@@ -1,7 +1,6 @@
 # Proyecto Lightning Sender
 
-Este proyecto se conecta a un servidor MQTT en tiempo real para recibir datos de detección de rayos y determinar si un relámpago ha ocurrido dentro de un área geográfica específica. Si se detecta un relámpago dentro del área, el programa agrega los datos del relámpago a Firestore, una base de datos en la nube de Firebase.
-
+Este proyecto se conecta a un servidor MQTT en tiempo real para recibir datos de detección de rayos y determinar si un relámpago ha ocurrido dentro de un área geográfica específica. Si se detecta un relámpago dentro del área, el programa agrega los datos del relámpago a Firestore.
 Actualmente, este programa está ejecutándose en segundo plano en una Raspberry Pi utilizando una sesión de `screen` llamada "lightning".
 
 ## Requisitos
@@ -41,17 +40,14 @@ screen -S lightning
 ```
 
 ```
-python lightningRegister
+run.bad
 ```
+El programa pedirá seleccionar una opción
+1. Real.
+2. Simulación
 
-si ya esta instalado el programa ejecutar el comando
-
-```
-screen -r lightning
-```
-Para desconectar de la sesión sin cerrarla, presiona Ctrl + A y luego Ctrl + D.
-
-Para analizar los datos que se muestran en la consola, ingrese el comando -v o -all. El primero imprimirá las coordenadas filtradas por polígonos, mientras que el segundo mostrará todas las coordenadas. Además, puede agregar un segundo argumento para especificar el intervalo de tiempo entre cada impresión en la consola.
+Real ejecutara el programa con normalidad registrando los procesos.
+Simulación se conectara a un mqtt distinto y pedirá ingresar json predeterminados para corroborar las funciones del código de manera controlada. Para desconectar de la sesión sin cerrarla, presiona Ctrl + A y luego Ctrl + D.
 
 ## Simulación
 Se ha creado un test para simular casos en diferentes áreas geográficas. Para ejecutar el test, se debe correr el script test_sendData.py. Este script simula los casos de lightning en Chile, Argentina, Uruguay y fuera del cono sur, y verifica que los datos sean procesados correctamente por la función OnMessage del módulo mqttFunctions.
@@ -59,7 +55,7 @@ Se ha creado un test para simular casos en diferentes áreas geográficas. Para 
 Para correr el test, se deben seguir los siguientes pasos:
 
 1) Asegurarse de tener instaladas las dependencias del proyecto, descritas en el archivo requirements.txt.
-2) Ejecutar el comando python test_sendData.py.
+2) Seleccionar la opción 2 de simulación.
 3) Verificar que el test haya corrido sin errores y que los datos hayan sido procesados correctamente.
 
 Es importante destacar que este test tiene como objetivo simular casos controlados para verificar el correcto funcionamiento de la función OnMessage, ExtractData y SearchPolygon.

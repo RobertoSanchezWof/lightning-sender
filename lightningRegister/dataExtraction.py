@@ -1,5 +1,5 @@
 from shapely.geometry import Point, Polygon
-import constants
+from lightningRegister.constants import *
 from datetime import datetime, timedelta
 
 def PointInPoly(lat, lon, poligono):
@@ -45,14 +45,14 @@ def FiltreData(data):
 
 def SearchPolygonCountry(data):
     """Extrae la información y busca si el relámpago esta en algún polígono"""
-    if PointInPoly(data['lat'], data['lon'], constants.polygonAmericaSur) == True:
-        if PointInPoly(data['lat'], data['lon'], constants.polygonChile) == True:
+    if PointInPoly(data['lat'], data['lon'], polygonAmericaSur):
+        if PointInPoly(data['lat'], data['lon'], polygonChile):
             data['country'] = "Chile"
             return data
-        elif PointInPoly(data['lat'], data['lon'], constants.polygonUruguay) == True:
+        elif PointInPoly(data['lat'], data['lon'], polygonUruguay):
             data['country'] = "Uruguay"
             return data
-        elif PointInPoly(data['lat'], data['lon'], constants.polygonBrasil) == True:
+        elif PointInPoly(data['lat'], data['lon'], polygonBrasil):
             data['country'] = "Brasil"
             return data
         else:
