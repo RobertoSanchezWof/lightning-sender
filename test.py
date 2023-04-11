@@ -8,6 +8,7 @@ from lightningRegister.firestoreStorage import timerpush
 dataSimulation = []
 
 async def main(dataSimulation):
+    """función principal de simulación"""
     async with Client(broker, port) as client:
         # Llama a la función OnConnect
         await OnConnect(client)
@@ -34,6 +35,7 @@ if __name__ == "__main__":
     print("2 simulación en Brasil")
     print("3 simulación en Uruguay")
     
+    # bucle para ingresar data de simulación
     while True:
         x = int(input("Ingrese la opcion: "))
         if x == 1:

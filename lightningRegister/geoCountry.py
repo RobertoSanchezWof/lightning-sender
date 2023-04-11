@@ -1,5 +1,7 @@
 from geopy.geocoders import Nominatim
 
+# Función que devuelve el país de una coordenada geográfica sin usar los polígonos, pero con la limitación que solo funciona 2500 veces al dia
+
 def GeoCountry(latitude, longitude):
     geolocator = Nominatim(user_agent="myGeocoder")
     location = geolocator.reverse((latitude, longitude), language="en")

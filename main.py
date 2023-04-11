@@ -5,6 +5,7 @@ from lightningRegister.mqttFunctions import OnConnect, OnMessage
 from lightningRegister.firestoreStorage import timerpush
 
 async def main():
+    """Función principal que itera el bucle de eventos"""
     async with Client(broker, port) as client:
         # Llama a la función OnConnect
         await OnConnect(client)
@@ -14,6 +15,7 @@ async def main():
         await asyncio.create_task(timerpush())
 
 if __name__ == "__main__":
+    """función principal"""
     # Establece las credenciales y el servidor MQTT
     broker = "Test.dtect.africa"
     port = 1883

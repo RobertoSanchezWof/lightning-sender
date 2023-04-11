@@ -2,13 +2,14 @@ from shapely.geometry import Point, Polygon
 from lightningRegister.constants import *
 from datetime import datetime, timedelta
 
-def PointInPoly(lat, lon, poligono):
+def PointInPoly(lat, lon, polygon):
+    """calcula si el punto ingresado esta dentro del polígono"""
     punto = Point(lon, lat)  # trabaja con coordenadas (x, y) que corresponden a (longitud, latitud)
-    poligono_shapely = Polygon(poligono)
-    return punto.within(poligono_shapely)
+    polygono_shapely = Polygon(polygon)
+    return punto.within(polygono_shapely)
 
 def CalculatePulseDuration(data):
-    """calcula el promedio de duración de los pulsos de un relampago"""
+    """calcula el promedio de duración de los pulsos de un relámpago"""
     date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
     unix_timestamps = []
     for x in data:

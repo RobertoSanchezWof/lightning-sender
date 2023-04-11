@@ -1,3 +1,5 @@
+# Descripción: Este archivo ejecuta el programa principal o el de simulación
+
 print("Bienvenido a lightning Register")
 print("Seleccione una opción:")
 print("1. Real")

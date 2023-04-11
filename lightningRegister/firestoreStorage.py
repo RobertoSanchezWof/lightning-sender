@@ -10,6 +10,7 @@ data_lock = asyncio.Lock()
 timeStar = int(datetime.now().timestamp())
 
 async def timerpush(test: bool = True):
+    """Envía los datos a Firestore cada x segundos"""
     while True:
         global timeStar
         async with data_lock: # Adquiere el lock antes de acceder a la lista

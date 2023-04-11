@@ -16,6 +16,7 @@ data_lock = asyncio.Lock()
 
 # Define la función de callback para cuando se reciba un mensaje
 async def OnMessage(client):
+    """función que recibe los mensajes del broker"""
     async with client.messages() as messages:
         global timer
         async for message in messages:
@@ -39,17 +40,20 @@ async def OnMessage(client):
                 
                 #datos de prueba por consola para mas información 
                 async def print_all():
+                    """imprime todos los datos del relámpago procesados por geoCountry"""
                     GCountry = GeoCountry(data['lat'], data['lon'])
                     print(f"país: {GCountry}-(latitud: {data['lat']}-longitud: {data['lon']}) https://www.google.com/maps/search/?api=1&query={data['lat']},{data['lon']}")
                     print("Tiempo de operación: ", elapsed_time)
 
                 async def print_v():
+                    """imprime solo los datos del relámpago que están dentro de un polígono"""
                     if data['country'] != False:
                         print(f"país: {data['country']}-(latitud: {data['lat']}-longitud: {data['lon']}) link: {data['link']}")
                         print("Tiempo de operación: ", elapsed_time)
                 
                 #esta seccion es para mostrar data por consola de forma controlada
                 if len(sys.argv) > 1:
+                    """verifica si tiene argumentos para mostrar data por consola"""
                     if sys.argv[1] == "-all":
                         if len(sys.argv) > 2 and sys.argv[2].isdigit():
                             x = int(sys.argv[2])
@@ -71,6 +75,7 @@ async def OnMessage(client):
 
 # Establece la función de callback para cuando se conecte el cliente al broker
 async def OnConnect(client):
+    """función encargada de suscribirse al tópico lightning"""
     print("Conexión exitosa al servidor MQTT")
     # Suscribe el cliente al tópico "lightning"
     await client.subscribe("lightning")
