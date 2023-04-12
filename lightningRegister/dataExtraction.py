@@ -53,11 +53,8 @@ def SearchPolygonCountry(data):
         elif PointInPoly(data['lat'], data['lon'], polygonUruguay):
             data['country'] = "Uruguay"
             return data
-        elif PointInPoly(data['lat'], data['lon'], polygonBrasil):
-            data['country'] = "Brasil"
-            return data
         else:
-            data['country'] = False
+            data['country'] = "otros"
             return data
     else:
         data['country'] = False

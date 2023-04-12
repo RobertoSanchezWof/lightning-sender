@@ -22,7 +22,8 @@ def AddDataToFirestore(data, dateStart, dateEnd, country):
         doc_ref.set({
             'timestamp_start': dateStart,
             'timestamp_end': dateEnd,
-            'data': data
+            'data': data,
+            'other': len(data)
         })
     except Exception as e:
         print("Error al subir los datos a Firestore:", e)

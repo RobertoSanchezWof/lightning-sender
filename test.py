@@ -57,8 +57,7 @@ if __name__ == "__main__":
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     try:
         loop = asyncio.get_event_loop()
-        loop.create_task(timerpush(False))
+        loop.create_task(timerpush(False, 10))
         loop.run_until_complete(main(dataSimulation))
     except KeyboardInterrupt:
-        client.disconnect()
         print("El programa fue interrumpido por el usuario. Cerrando...")
