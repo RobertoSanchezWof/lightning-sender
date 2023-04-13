@@ -2,6 +2,7 @@ import asyncio
 from lightningRegister.mqttFunctions import dataList
 from lightningRegister.firebaseFunctions import AddDataToFirestore
 from datetime import datetime
+import csv
 
 # Crea un objeto Lock que será compartido entre los dos hilos
 data_lock = asyncio.Lock()
@@ -45,6 +46,12 @@ async def timerpush(test: bool = True, time: int = 300):
                     if test:
                         print(f"Otros: {len(listOther)}")
                         AddDataToFirestore(listOther, timeStar, timeEnd, "otros")
+                        #guarda la lista en csv de otros
+                        # with open('data.csv', 'w', newline='') as file:
+                        #     writer = csv.writer(file)
+                        #     writer.writerow(["lat", "lon", "country", "duration", "type", "time", "peakCurrent"])
+                        #     for data in dataList:
+                        #         writer.writerow([data['lat'], data['lon'], data['country'], data['duration'], data['type'], data['time'], data['peakCurrent']])
                 timeStar = timeEnd
                 dataList.clear()  # Borra la lista después de agregar los datos
         await asyncio.sleep(time)

@@ -28,7 +28,7 @@ async def OnMessage(client):
                 data = SearchPolygonCountry(data)
                 #si el relámpago esta dentro de un polígono, extrae la información
                 if data['country'] != False:
-                    #agrega duración del pulso y link de google maps
+                    #agrega duración del pulso, link de google maps y elimina data no requerida
                     data = FiltreData(data)
                     # Agrega en la lista de carácter global 
                     async with data_lock:  # Adquiere el lock antes de agregar datos a la lista

@@ -30,18 +30,29 @@ def FiltreData(data):
     """Extrae los los pulsos anidados y genera link de google maps"""
     pulses = [pulse['time'] for pulse in data['Pulses']]
     data['duration'] = CalculatePulseDuration(pulses)
-    data['link'] = f"https://www.google.com/maps/search/?api=1&query={data['lat']},{data['lon']}"
-
-    filteredData = {
-        'type': data['type'],
-        'time': data['time'],
-        'peakCurrent': data['peakCurrent'],
-        'lat': data['lat'],
-        'lon': data['lon'],
-        'country': data['country'],
-        'duration': data['duration'],
-        'link': data['link']
-    }
+    # si el pais es otros no genera link de google maps
+    if data['country'] != "otros":
+        data['link'] = f"https://www.google.com/maps/search/?api=1&query={data['lat']},{data['lon']}"
+        filteredData = {
+            'type': data['type'],
+            'time': data['time'],
+            'peakCurrent': data['peakCurrent'],
+            'lat': data['lat'],
+            'lon': data['lon'],
+            'country': data['country'],
+            'duration': data['duration'],
+            'link': data['link']
+        }
+    else:
+        filteredData = {
+            'type': data['type'],
+            'time': data['time'],
+            'peakCurrent': data['peakCurrent'],
+            'lat': data['lat'],
+            'lon': data['lon'],
+            'country': data['country'],
+            'duration': data['duration'],
+        }
     return filteredData
 
 def SearchPolygonCountry(data):
