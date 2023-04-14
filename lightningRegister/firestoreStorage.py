@@ -10,13 +10,27 @@ data_lock = asyncio.Lock()
 #captura tiempo actual de inicio
 timeStar = int(datetime.now().timestamp())
 
-async def timerpush(test: bool = True, time: int = 300):
+#guarda la lista en csv de otros
+def CreateCSV(dataList, country):
+    with open(f'data{country}.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        #Si el país es Otros, no agrega el link
+        if country == "Otros":
+            writer.writerow(["lat", "lon", "country", "duration", "type", "time", "peakCurrent"])
+            for data in dataList:
+                writer.writerow([data['lat'], data['lon'], data['country'], data['duration'], data['type'], data['time'], data['peakCurrent']])
+        # Si el país es Chile o Uruguay, agrega el link
+        else:
+            writer.writerow(["lat", "lon", "country", "duration", "type", "time", "peakCurrent", "link"])
+            for data in dataList:
+                writer.writerow([data['lat'], data['lon'], data['country'], data['duration'], data['type'], data['time'], data['peakCurrent'], data['link']])
+
+async def timerpush(time, saveCSV, saveDB, printCountry):
     """Envía los datos a Firestore cada x segundos"""
     while True:
         global timeStar
         async with data_lock: # Adquiere el lock antes de acceder a la lista
             #Si hay datos en la lista, los envía a Firestore 
-            print(f"Datos en la lista: {len(dataList)}")
             if dataList:
                 listChile = []
                 listUruguay = []
@@ -31,27 +45,27 @@ async def timerpush(test: bool = True, time: int = 300):
                 timeEnd = int(datetime.now().timestamp())
                 # Envía las listas por país a Firestore
                 if listChile:
-                    if test:
-                        print(f"Chile: {len(listChile)}")
+                    if saveDB:
                         AddDataToFirestore(listChile, timeStar, timeEnd, "chile")
-                    else:
+                    if saveCSV:
+                        CreateCSV(listChile, "Chile")
+                    if printCountry:
                         print(f"Chile: {len(listChile)}")
                 if listUruguay:
-                    if test:
-                        print(f"Uruguay: {len(listUruguay)}")
+                    if saveDB:
                         AddDataToFirestore(listUruguay, timeStar, timeEnd, "uruguay")
-                    else:
+                    if saveCSV:
+                        CreateCSV(listUruguay, "Uruguay")
+                    if printCountry:
                         print(f"Uruguay: {len(listUruguay)}")
                 if listOther:
-                    if test:
-                        print(f"Otros: {len(listOther)}")
+                    if saveDB:
                         AddDataToFirestore(listOther, timeStar, timeEnd, "otros")
-                        #guarda la lista en csv de otros
-                        # with open('data.csv', 'w', newline='') as file:
-                        #     writer = csv.writer(file)
-                        #     writer.writerow(["lat", "lon", "country", "duration", "type", "time", "peakCurrent"])
-                        #     for data in dataList:
-                        #         writer.writerow([data['lat'], data['lon'], data['country'], data['duration'], data['type'], data['time'], data['peakCurrent']])
+                    if saveCSV:
+                        CreateCSV(listOther, "Otros")
+                    if printCountry:
+                        print(f"Otros: {len(listOther)}")
                 timeStar = timeEnd
+                print(f"Total de listas: {len(dataList)}")
                 dataList.clear()  # Borra la lista después de agregar los datos
         await asyncio.sleep(time)

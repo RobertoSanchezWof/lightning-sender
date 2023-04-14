@@ -1,7 +1,6 @@
 # Proyecto Lightning Sender
 
-Este proyecto se conecta a un servidor MQTT en tiempo real para recibir datos de detección de rayos y determinar si un relámpago ha ocurrido dentro de un área geográfica específica. Si se detecta un relámpago dentro del área, el programa agrega los datos del relámpago a Firestore.
-Actualmente, este programa está ejecutándose en segundo plano en una Raspberry Pi utilizando una sesión de `screen` llamada "lightning".
+Este proyecto se conecta a un servidor MQTT en tiempo real para recibir datos sobre detección de rayos y determinar si un relámpago ha ocurrido dentro de una zona geográfica específica. Si se detecta un relámpago en el área, el programa añade la información del relámpago a una lista. Tras un período de tiempo establecido, el programa envía la lista de datos a Firestore, organizados por país, y luego limpia la lista para que pueda volver a llenarse. Actualmente, el programa se ejecuta en segundo plano en una Raspberry Pi utilizando una sesión de screen denominada "lightning".
 
 ## Requisitos
 Este proyecto fue desarrollado en un ambiente Conda. Si deseas crear un entorno conda con las mismas dependencias del proyecto, sigue los siguientes pasos:
@@ -39,15 +38,26 @@ screen -S lightning
 
 ```
 
+En caso de windows  ejecutar. 
 ```
 run.bad
 ```
+Para ejecutar el programa de forma normal. 
+```
+python main.py 
+```
+Para ejecutar un test controlado.
+```
+python test.py
+```  
 El programa pedirá seleccionar una opción
 1. Real.
 2. Simulación
 
 Real ejecutara el programa con normalidad registrando los procesos.
 Simulación se conectara a un mqtt distinto y pedirá ingresar json predeterminados para corroborar las funciones del código de manera controlada. Para desconectar de la sesión sin cerrarla, presiona Ctrl + A y luego Ctrl + D.
+
+Hay un archivo llamado config.ini que incluye variables estáticas utilizadas por el programa, junto con una descripción que acompaña a cada una de ellas para facilitar su comprensión. Antes de ejecutar el programa, por favor revise el archivo para asegurarse de que la configuración actual cumple con sus necesidades.
 
 ## Simulación
 Se ha creado un test para simular casos en diferentes áreas geográficas. Para ejecutar el test, se debe correr el script test_sendData.py. Este script simula los casos de lightning en Chile, Argentina, Uruguay y fuera del cono sur, y verifica que los datos sean procesados correctamente por la función OnMessage del módulo mqttFunctions.
