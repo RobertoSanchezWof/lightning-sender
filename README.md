@@ -40,7 +40,7 @@ screen -S lightning
 
 En caso de windows  ejecutar. 
 ```
-run.bad
+run.bat
 ```
 Para ejecutar el programa de forma normal. 
 ```
