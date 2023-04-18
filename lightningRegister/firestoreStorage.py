@@ -60,7 +60,7 @@ async def timerpush(time, saveCSV, saveDB, printCountry):
                         print(f"Uruguay: {len(listUruguay)}")
                 if listOther:
                     if saveDB:
-                        AddDataToFirestore(listOther, timeStar, timeEnd, "otros")
+                        AddDataToFirestore(listOther, timeStar, timeEnd, "others")
                     if saveCSV:
                         CreateCSV(listOther, "Otros")
                     if printCountry:

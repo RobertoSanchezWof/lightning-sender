@@ -23,7 +23,6 @@ def AddDataToFirestore(data, dateStart, dateEnd, country):
             'timestamp_start': dateStart,
             'timestamp_end': dateEnd,
             'data': data,
-            'other': len(data)
         })
     except Exception as e:
         print("Error al subir los datos a Firestore:", e)

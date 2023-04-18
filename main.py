@@ -5,11 +5,15 @@ from lightningRegister.mqttFunctions import OnConnect, OnMessage
 from lightningRegister.firestoreStorage import timerpush
 import configparser
 from configparser import NoSectionError, NoOptionError
+import logging
 
+# Configura el archivo de registro
+logging.basicConfig(filename='error.txt', level=logging.ERROR)
+
+# Accede a los valores de configuración
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-# Accede a los valores de configuración
 try:
     time = config.getint('general', 'TIME')
     saveDB = config.getboolean('general', 'SAVE_DB')
@@ -46,10 +50,22 @@ if __name__ == "__main__":
     if sys.platform == "win32":
         # Cambia al "Selector" event loop en Windows
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    try:
-        loop = asyncio.get_event_loop()
-        loop.create_task(timerpush(time, saveCSV, saveDB, printCountry))
-        loop.run_until_complete(main(printInfo, timeInfo, typeInfo))
-    except KeyboardInterrupt:
-        client.disconnect()
-        print("El programa fue interrumpido por el usuario. Cerrando...")
+    loop = asyncio.get_event_loop()
+    timerpush_task = None
+    
+    while True:
+        try:
+            timerpush_task = loop.create_task(timerpush(time, saveCSV, saveDB, printCountry))
+            loop.run_until_complete(main(printInfo, timeInfo, typeInfo))
+        except KeyboardInterrupt as e:
+            client.disconnect()
+            print("El programa fue interrumpido por el usuario. Cerrando...")
+            break
+        except Exception as e:  # Registra cualquier evento de interrupción y continua el bucle
+            logging.error(f"Se produjo una excepción: {e}")
+            if timerpush_task:  # Cancela la tarea timerpush si está ejecutándose
+                timerpush_task.cancel()
+            loop.stop()  # Detén el bucle de eventos actual
+            loop = asyncio.new_event_loop()  # Crea un nuevo bucle de eventos
+            asyncio.set_event_loop(loop)  # Establece el nuevo bucle de eventos
+            continue  # Continúa el bucle para reiniciar los hilos

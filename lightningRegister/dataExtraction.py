@@ -74,6 +74,7 @@ def FiltreData(data):
         }
     return filteredData
 
+# region prints
 #datos de prueba por consola para mas información 
 async def print_all(data, elapsed_time):
     """imprime todos los datos del relámpago procesados por geoCountry"""
@@ -86,4 +87,4 @@ async def print_v(data, elapsed_time):
     if data['country'] != False:
         print(f"país: {data['country']}-(latitud: {data['lat']}-longitud: {data['lon']}) link: {data['link']}")
         print("Tiempo de operación: ", elapsed_time)
-            
+# endregion
