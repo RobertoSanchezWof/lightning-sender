@@ -69,3 +69,20 @@ Para correr el test, se deben seguir los siguientes pasos:
 3) Verificar que el test haya corrido sin errores y que los datos hayan sido procesados correctamente.
 
 Es importante destacar que este test tiene como objetivo simular casos controlados para verificar el correcto funcionamiento de la función OnMessage, ExtractData y SearchPolygon.
+
+## Proceso interno de funcionamiento
+
+1. Inicialmente, el programa importa todas las librerías y módulos necesarios, así como también lee y valida la configuración de un archivo 'config.ini'.
+2. Se conecta a un servidor MQTT y se suscribe al tópico "lightning" para recibir información sobre rayos.
+3. Cada vez que se recibe un mensaje del tópico "lightning", se procesa y se guarda en una lista. Esto incluye filtrar los datos, calcular la duración de los pulsos y verificar si el rayo está dentro de un polígono específico (Chile, Uruguay u otros).
+4. Periódicamente, según el tiempo especificado en la configuración, el programa guarda los datos almacenados en la lista de acuerdo a las siguientes opciones:
+    * Guardar en una base de datos de Firestore.  
+    * Guardar en un archivo CSV.
+    * Imprimir la cantidad de datos por país en la consola.
+5. Después de guardar los datos, la lista se vacía y el proceso continúa desde el paso 3.
+
+El código también incluye funciones para manejar conexiones y mensajes MQTT, así como funciones para trabajar con la base de datos Firestore y archivos CSV. En general, el programa se encarga de recibir información sobre rayos, procesarla y almacenarla de manera organizada según las preferencias del usuario.
+
+## Diagrama de flujo
+
+https://drive.google.com/file/d/1agI55qU_g0tX1vC2JyIL8KrezY0d1Zzn/view?usp=share_link
